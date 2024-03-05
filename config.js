@@ -1,7 +1,16 @@
-import StatusBar from "./widgets/status-bar/index.js";
+// @ts-nocheck
+const entry = `${App.configDir}/main.ts`
+const outdir = '/tmp/ags/main.js'
 
-/** @type {import('types/app.js').Config} */
-export default {
-	icons: `${App.configDir}/assets`,
-	windows: [StatusBar()],
-};
+try {
+  await Utils.execAsync([
+    'bun', 'build', entry,
+    '--outdir', outdir,
+    '--external', 'resource://*',
+    '--external', 'gi://*',
+  ])
+  await import(`file://${outdir}/main.js`)
+} catch (error) {
+  console.error(error)
+  App.quit()
+}
