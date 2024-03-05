@@ -1,13 +1,11 @@
 import Audio from "./modules/audio.js";
 import Battery from "./modules/battery.js";
-import { Bluetooth } from "./modules/bluetooth.js";
+import Bluetooth from "./modules/bluetooth.js";
 import Brightness from "./modules/brightness.js";
 import Clock from "./modules/clock.js";
 import { WindowTitle, Workspaces } from "./modules/hyprland.js";
 import Network from "./modules/network.js";
 import Tray from "./modules/tray.js";
-
-const divide = ([total, free]) => free / total;
 
 const cpu = Variable(0, {
   poll: [
@@ -42,7 +40,7 @@ const ram = Variable(0, {
   ],
 });
 
-const value = (/** @type {number} */ v) => `${Math.round(v * 100)}%`;
+const value = (v: number) => `${Math.round(v * 100)}%`;
 
 export default function StatusBar(monitor = 0) {
   const spacing = 10;

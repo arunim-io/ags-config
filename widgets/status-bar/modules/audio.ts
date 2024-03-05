@@ -1,31 +1,27 @@
 const audio = await Service.import("audio");
 
-function Microphone() {
-  return Widget.Box({
-    children: [
-      Widget.Label().hook(
-        audio,
-        (self) => {
-          self.label = audio.microphone.stream?.is_muted ? "OFF" : "ON";
-        },
-        "microphone-changed",
-      ),
-      Widget.Icon().hook(
-        audio,
-        (self) => {
-          self.icon = `audio-input-microphone${audio.microphone.stream?.is_muted ? "-muted" : ""
-            }-symbolic`;
-        },
-        "microphone-changed",
-      ),
-    ],
-  });
-}
-
 export default Widget.Box({
   spacing: 5,
   children: [
-    Microphone(),
+    Widget.Box({
+      children: [
+        Widget.Label().hook(
+          audio,
+          (self) => {
+            self.label = audio.microphone.stream?.is_muted ? "OFF" : "ON";
+          },
+          "microphone-changed",
+        ),
+        Widget.Icon().hook(
+          audio,
+          (self) => {
+            self.icon = `audio-input-microphone${audio.microphone.stream?.is_muted ? "-muted" : ""
+              }-symbolic`;
+          },
+          "microphone-changed",
+        ),
+      ],
+    }),
     Widget.Box({
       children: [
         Widget.Label({

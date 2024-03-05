@@ -5,8 +5,7 @@ export const WindowTitle = Widget.Label({
   visible: hyprland.active.client.bind("address").as((addr) => !!addr),
 });
 
-/** @param {string | number} no */
-function dispatch(no) {
+function dispatch(no: string | number) {
   hyprland.messageAsync(`dispatch workspace ${no}`);
 }
 
@@ -22,14 +21,13 @@ export const Workspaces = Widget.EventBox({
       }),
     ),
 
-    setup: (self) => {
-      self.hook(hyprland, () => {
-        for (const btn of self.children) {
+    setup: (self) =>
+      self.hook(hyprland, () =>
+        self.children.map((btn) => {
           btn.visible = hyprland.workspaces.some(
             (ws) => ws.id === btn.attribute,
           );
-        }
-      });
-    },
+        }),
+      ),
   }),
 });

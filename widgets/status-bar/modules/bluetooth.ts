@@ -1,6 +1,6 @@
 const bluetooth = await Service.import("bluetooth");
 
-export const Bluetooth = Widget.Box().hook(bluetooth, (self) => {
+export default Widget.Box().hook(bluetooth, (self) => {
   const enabled = bluetooth.bind("enabled");
 
   self.children = [
