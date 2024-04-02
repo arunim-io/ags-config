@@ -1,7 +1,13 @@
 const hyprland = await Service.import("hyprland");
 
-function dispatch(no: string | number) {
-  hyprland.messageAsync(`dispatch workspace ${no}`);
+export const WindowTitle = Widget.Label({
+  truncate: "end",
+  label: hyprland.active.client.bind("title"),
+  visible: hyprland.active.client.bind("address").as((addr) => !!addr),
+});
+
+function dispatch(number: string | number) {
+  hyprland.messageAsync(`dispatch workspace ${number}`);
 }
 
 export const Workspaces = Widget.EventBox({

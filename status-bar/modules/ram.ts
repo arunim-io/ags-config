@@ -1,3 +1,5 @@
+import { toPercentage } from "utils";
+
 const ram = Variable(0, {
   poll: [
     2000,
@@ -17,9 +19,7 @@ const ram = Variable(0, {
 
 export default Widget.Box({
   children: [
-    Widget.Label({
-      label: ram.bind().as((v: number) => `${Math.round(v * 100)}%`),
-    }),
+    Widget.Label({ label: ram.bind().as(toPercentage) }),
     Widget.Icon({ icon: "ram-symbolic" }),
   ],
 });

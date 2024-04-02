@@ -1,23 +1,30 @@
-import brightness from "services/brightness.js";
+import { toPercentage } from "utils";
+import brightness from "../services/brightness";
 
-const value = brightness.bind("screen_value");
+function getIcon(value: number) {
+  if (value <= 0.25) {
+    return "display-brightness-low-symbolic";
+  }
+  if (value >= 0.5 && value < 0.75) {
+    return "display-brightness-medium-symbolic";
+  }
+  if (value >= 0.75) {
+    return "display-brightness-high-symbolic";
+  }
+  return "display-brightness-symbolic";
+}
 
-export default Widget.Box({
-	children: [
-		Widget.Label({ label: value.as((value) => `${value * 100}%`) }),
-		Widget.Icon({
-			icon: value.as((value) => {
-				if (value <= 0.25) {
-					return "display-brightness-low-symbolic";
-				}
-				if (value >= 0.5 && value < 0.75) {
-					return "display-brightness-medium-symbolic";
-				}
-				if (value >= 0.75) {
-					return "display-brightness-high-symbolic";
-				}
-				return "display-brightness-symbolic";
-			}),
-		}),
-	],
+export default Widget.Button({
+  onScrollUp: () => {
+    brightness.screen_value += 0.1;
+  },
+  onScrollDown: () => {
+    brightness.screen_value -= 0.1;
+  },
+  child: Widget.Box({
+    children: [
+      Widget.Label({ label: brightness.bind("screen_value").as(toPercentage) }),
+      Widget.Icon({ icon: brightness.bind("screen_value").as(getIcon) }),
+    ],
+  }),
 });

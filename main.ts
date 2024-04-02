@@ -1,7 +1,7 @@
-import AppLauncher from "widgets/app-launcher/index.js";
-import StatusBar from "widgets/status-bar/index.js";
+import AppLauncher from "app-launcher/index";
+import StatusBar from "status-bar/index";
 
 export default App.config({
-	icons: `${App.configDir}/assets`,
-	windows: [StatusBar(), AppLauncher],
+  icons: `${App.configDir}/assets`,
+  windows: [StatusBar(), AppLauncher],
 });

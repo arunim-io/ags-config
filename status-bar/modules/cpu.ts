@@ -1,3 +1,5 @@
+import { toPercentage } from "utils";
+
 const cpu = Variable(0, {
   poll: [
     2000,
@@ -16,9 +18,7 @@ const cpu = Variable(0, {
 
 export default Widget.Box({
   children: [
-    Widget.Label({
-      label: cpu.bind().as((v: number) => `${Math.round(v * 100)}%`),
-    }),
+    Widget.Label({ label: cpu.bind().as(toPercentage) }),
     Widget.Icon({ icon: "cpu-symbolic" }),
   ],
 });
