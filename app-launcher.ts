@@ -34,9 +34,10 @@ function List() {
     hexpand: true,
     css: `margin-bottom: ${spacing}px;`,
     onAccept: () => {
-      if (apps.length > 0) {
+      const app = apps.filter((app) => app.visible)[0];
+      if (app) {
         App.toggleWindow(WINDOW_NAME);
-        apps[0].attribute.app.launch();
+        app.attribute.app.launch();
       }
     },
     onChange: ({ text }) =>
