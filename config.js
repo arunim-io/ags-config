@@ -1,5 +1,5 @@
 // @ts-nocheck
-const entry = `${App.configDir}/main.ts`;
+const entry = `${App.configDir}/src/main.ts`;
 const outdir = "/tmp/ags/main.js";
 
 try {

@@ -7,7 +7,7 @@
 		"checkJs": true,
 		"strict": true,
 		"noImplicitAny": false,
-		"baseUrl": ".",
+		"baseUrl": "./src",
 		"typeRoots": ["./types"],
 		"skipLibCheck": true
 	}
