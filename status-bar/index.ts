@@ -5,6 +5,7 @@ import Brightness from "./modules/brightness";
 import Clock from "./modules/clock";
 import Cpu from "./modules/cpu";
 import { WindowTitle, Workspaces } from "./modules/hyprland";
+import Media from "./modules/media";
 import Network from "./modules/network";
 import Ram from "./modules/ram";
 import Tray from "./modules/tray";
@@ -29,6 +30,7 @@ export default function StatusBar(monitor?: number) {
         spacing,
         children: [
           Tray,
+          Media,
           Audio,
           Bluetooth,
           Network,
