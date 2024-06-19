@@ -2,7 +2,7 @@ import { toPercentage } from "utils";
 
 const audio = await Service.import("audio");
 
-const Mic = Widget.Box().hook(
+const Input = Widget.Box().hook(
   audio,
   (self) => {
     const is_muted = audio.microphone.stream?.is_muted;
@@ -17,7 +17,7 @@ const Mic = Widget.Box().hook(
   "microphone-changed",
 );
 
-const Sound = Widget.Button({
+const Output = Widget.Button({
   onScrollUp: () => {
     audio.speaker.volume += 0.05;
   },
@@ -58,5 +58,5 @@ const Sound = Widget.Button({
 
 export default Widget.Box({
   spacing: 5,
-  children: [Mic, Sound],
+  children: [Input, Output],
 });
