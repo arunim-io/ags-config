@@ -11,7 +11,7 @@ function Bar(monitor: number) {
     child: Widget.CenterBox({
       start_widget: Widget.Label({
         hpack: "center",
-        label: "Welcome to AGS!",
+        label: "Hewllo",
       }),
       end_widget: Widget.Label({
         hpack: "center",
