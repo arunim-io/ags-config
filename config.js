@@ -1,5 +1,5 @@
 const entry = `${App.configDir}/src/main.ts`;
-const main = "/tmp/ags/main.js";
+const main = "/tmp/ags.js";
 
 try {
   // @ts-ignore
