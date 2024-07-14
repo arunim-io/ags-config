@@ -22,12 +22,10 @@ const ram = Variable(0, {
 	],
 });
 
-const ram_indicator = Widget.Box({
-	children: [
-		Widget.Label({ label: ram.bind().as((value) => `${value}%`) }),
-		Widget.Icon({ icon: "ram-symbolic" }),
-	],
-});
+const ram_indicator = Widget.Box([
+	Widget.Icon("ram-symbolic"),
+	Widget.Label({ label: ram.bind().as((value) => `${value}%`) }),
+]);
 
 const cpu = Variable(0, {
 	poll: [
@@ -45,12 +43,10 @@ const cpu = Variable(0, {
 	],
 });
 
-const cpu_indicator = Widget.Box({
-	children: [
-		Widget.Label({ label: cpu.bind().as((value) => `${value}%`) }),
-		Widget.Icon({ icon: "cpu-symbolic" }),
-	],
-});
+const cpu_indicator = Widget.Box([
+	Widget.Icon("cpu-symbolic"),
+	Widget.Label({ label: cpu.bind().as((value) => `${value}%`) }),
+]);
 
 function brightness_indicator() {
 	const icon_types = {
@@ -110,23 +106,18 @@ function microphone_indicator() {
 		onScrollDown: () => {
 			Audio.microphone.volume -= 0.05;
 		},
-		child: Widget.Box({
-			children: [
-				Widget.Icon({
-					icon: Utils.watch(getIcon(), Audio.microphone, getIcon),
-				}),
-				Widget.Label({
-					label: Utils.merge(
-						[
-							Audio.microphone.bind("volume"),
-							Audio.microphone.bind("is_muted"),
-						],
-						(volume, is_muted) =>
-							is_muted ? "MUTED" : `${Math.round(volume * 100)}%`,
-					),
-				}),
-			],
-		}),
+		child: Widget.Box([
+			Widget.Icon({
+				icon: Utils.watch(getIcon(), Audio.microphone, getIcon),
+			}),
+			Widget.Label({
+				label: Utils.merge(
+					[Audio.microphone.bind("volume"), Audio.microphone.bind("is_muted")],
+					(volume, is_muted) =>
+						is_muted ? "MUTED" : `${Math.round(volume * 100)}%`,
+				),
+			}),
+		]),
 	});
 }
 function speaker_indicator() {
@@ -157,9 +148,7 @@ function speaker_indicator() {
 		},
 		child: Widget.Box({
 			children: [
-				Widget.Icon({
-					icon: Utils.watch(getIcon(), Audio.speaker, getIcon),
-				}),
+				Widget.Icon({ icon: Utils.watch(getIcon(), Audio.speaker, getIcon) }),
 				Widget.Label({
 					label: Utils.merge(
 						[Audio.speaker.bind("volume"), Audio.speaker.bind("is_muted")],
@@ -218,19 +207,19 @@ function WorkspaceList() {
 			children: Array.from({ length: 10 }, (_, index) => index + 1).map((no) =>
 				Widget.Button({
 					attribute: no,
-					label: `${no}`,
+					label: no.toString(),
 					onClicked: () => dispatch(no),
 				}),
 			),
-
-			setup: (self) =>
+			setup(self) {
 				self.hook(Hyprland, () =>
 					self.children.map((btn) => {
 						btn.visible = Hyprland.workspaces.some(
 							(ws) => ws.id === btn.attribute,
 						);
 					}),
-				),
+				);
+			},
 		}),
 	});
 }
