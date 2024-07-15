@@ -1,6 +1,6 @@
-import StatusBar from "./status-bar/index";
-import AppMenu from "./app-menu/index";
+import StatusBar from "./modules/status-bar/index";
+import AppMenu from "./modules/app-menu/index";
 
 App.config({
-  windows: [StatusBar(0), AppMenu()],
+  windows: [StatusBar(), AppMenu()],
 });
